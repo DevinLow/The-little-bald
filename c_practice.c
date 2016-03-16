@@ -73,3 +73,125 @@ void practice_3(void)
         }
     }	
 }
+/*
+题目：输入某年某月某日，判断这一天是这一年的第几天？
+
+程序分析：以3月5日为例，应该先把前两个月的加起来，然后再加上5天即本年的第几天，特殊情况，闰年且输入月份大于3时需考虑多加一天。
+
+*/
+void practice_4(void)
+{
+    int day,month,year,sum,leap;
+  	printf("\n请输入年、月、日，格式为：年,月,日（2015,12,10）\n");
+    scanf("%d,%d,%d",&year,&month,&day);  // 格式为：2015,12,10
+    switch(month) // 先计算某月以前月份的总天数
+    {
+        case 1:sum=0;break;
+        case 2:sum=31;break;
+        case 3:sum=59;break;
+        case 4:sum=90;break;
+        case 5:sum=120;break;
+        case 6:sum=151;break;
+        case 7:sum=181;break;
+        case 8:sum=212;break;
+        case 9:sum=243;break;
+        case 10:sum=273;break;
+        case 11:sum=304;break;
+        case 12:sum=334;break;
+        default:printf("data error");break;
+    }
+    sum=sum+day; // 再加上某天的天数
+    if(year%400==0||(year%4==0&&year%100!=0)) {// 判断是不是闰年
+        leap=1;
+    } else {
+       leap=0;
+    }
+    if(leap==1&&month>2) { // *如果是闰年且月份大于2,总天数应该加一天
+        sum++;
+    }
+    printf("这是这一年的第 %d 天。",sum);
+    printf("\n");
+
+}
+/*
+题目：输入三个整数x,y,z，请把这三个数由小到大输出。
+
+程序分析：我们想办法把最小的数放到x上，先将x与y进行比较，如果x>y则将x与y的值进行交换，然后再用x与z进行比较，如果x>z则将x与z的值进行交换，这样能使x最小。
+
+*/
+void practice_5(void)
+{
+    int x,y,z,t;
+    printf("\n请输入三个数字:\n");
+    scanf("%d%d%d",&x,&y,&z);
+    if (x>y) { /*交换x,y的值*/
+        t=x;x=y;y=t;
+    }
+    if(x>z) { /*交换x,z的值*/
+        t=z;z=x;x=t;
+    }
+    if(y>z) { /*交换z,y的值*/
+        t=y;y=z;z=t;
+    }
+    printf("从小到大排序: %d %d %d\n",x,y,z);
+}
+
+/*
+题目：用*号输出字母C的图案。
+
+程序分析：可先用'*'号在纸上写出字母C，再分行输出。
+*/
+void practice_6(void)
+{
+    printf("用 * 号输出字母 C!\n");
+    printf(" ****\n");
+    printf(" *\n");
+    printf(" * \n");
+    printf(" ****\n");
+}
+/*
+题目：输出特殊图案，请在c环境中运行，看一看，Very Beautiful!
+
+程序分析：字符共有256个。不同字符，图形不一样。
+
+VC6.0下出现中文乱码(原因+解决方法):
+
+176的16进制是B0，219的16进制是DB，0xB0DB是"佰"字的内码，所以输出的就是"佰"了。
+
+主要原因是文件信息的代码页不同，我们所使用的操作系统中文状态下的代码页，要显示扩展的ASCII码需要在437 OEM-美国这个下面显示，这样就可以显示出你所希望的。具体修改控制台的默认代码页步骤如下：
+
+    1.点击运行界面左上角标题栏图标【c:\】，选择默认值一项
+    2.修改默认代码页，936（ANSI/OEM-简体中文GBK）为437 OEM-美国
+    3、关闭后重新运行一下即可
+
+*/
+void practice_7(void)
+{
+	char a=176,b=219;
+    printf("%c%c%c%c%c\n",b,a,a,a,b);
+    printf("%c%c%c%c%c\n",a,b,a,b,a);
+    printf("%c%c%c%c%c\n",a,a,b,a,a);
+    printf("%c%c%c%c%c\n",a,b,a,b,a);
+    printf("%c%c%c%c%c\n",b,a,a,a,b);
+}
+/*
+题目：输出9*9口诀。
+
+程序分析：分行与列考虑，共9行9列，i控制行，j控制列。
+*/
+void practice_8(void)
+{
+	int i,j;
+    printf("\n");
+    for (i=1;i<=9;i++)
+    {
+        for(j=1;j<=i;j++)
+        {
+        	//printf("%d*%d=%-4d",j,i,i*j);
+        	printf("%-4d",i*j);
+            if(i==j)
+            	printf("\n"); /*每一行后换行*/
+        }
+   
+    }
+}
